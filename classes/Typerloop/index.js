@@ -2,12 +2,12 @@
 //  Typerloop
 //
 //  example:
-//  const typer = new TyperLoop({
+//  const typer = new Typerloop({
 //      text: ["Hello", "This is how the Typerloop works."], // a set of text items to be typed sequentially;
 //      min:   24,    // minimum number of milliseconds before the next character is typed;
 //      max:   160,   // maximum number of milliseconds before the next character is typed;
 //      word_min:   0,    // minimum number of milliseconds before the next word is typed, in addition to character delay;
-//      word_max:   480,   // maximum number of milliseconds before the next word is typed, in addition to character delay;
+//      word_max:   240,   // maximum number of milliseconds before the next word is typed, in addition to character delay;
 //      delay: 1000,  // milliseconds to show the completed text item before switching to the next;
 //      on_update: (new_text, new_character, previous_character)  => { /* text updated to string new_text; */ return true; },
 //      on_next:   (full_text)                                    => { /* text item switched and will type full_text; */ return true; },
@@ -41,11 +41,11 @@ class Typerloop {
             text: input_text, // array
             speed: {
                 min: props.min != null && typeof props.min == "number" && props.min > 0 ? parseInt(props.min) : 24,
-                max: props.max != null && typeof props.max == "number" && props.max > 0 ? parseInt(props.min) : 160,
+                max: props.max != null && typeof props.max == "number" && props.max > 0 ? parseInt(props.max) : 160,
             },
             word_delay: {
                 min: props.word_min != null && typeof props.word_min == "number" ? parseInt(props.word_min) : 0,
-                max: props.word_max != null && typeof props.word_max == "number" ? parseInt(props.word_max) : 480,
+                max: props.word_max != null && typeof props.word_max == "number" ? parseInt(props.word_max) : 240,
             },
             text_item_delay: props.delay != null && typeof props.delay == "number" && props.delay > 0 ? parseInt(props.delay) : 1000,
             on_update: on_update,
@@ -54,6 +54,7 @@ class Typerloop {
         };
 
         TL.cache = {
+            _mounted: false,
             text_item_index: null,
             full_text: "",
             partial_text: "",
@@ -68,15 +69,22 @@ class Typerloop {
 
     start = () => {
         const TL = this; // convenience alias for this (class instance);
+        TL.cache._mounted = true;
         TL.next_text();
         TL.do_type();
     };
 
+    unmount = () => {
+        const TL = this;
+        TL.cache._mounted = false; // prevents memory leaks when React/etc. switches out components
+    }
+
     next_text = () => {
         const TL = this;
-        if (typeof TL.cache.text_item_index != "number") TL.cache.text_item_index = 0;
-        // if null or broken
-        else if (TL.cache.text_item_index) TL.cache.text_item_index = parseInt(TL.cache.text_item_index + 1); // else, step
+        if (!TL.cache._mounted) return false; // preventing memory leaks
+        //
+        if (typeof TL.cache.text_item_index != "number") TL.cache.text_item_index = 0; // if null or broken
+        else TL.cache.text_item_index = parseInt(TL.cache.text_item_index + 1); // else, step
         //
         if (TL.cache.text_item_index >= TL.vars.text.length) {
             TL.cache.text_item_index = 0;
@@ -87,13 +95,14 @@ class Typerloop {
         TL.cache.partial_text = "";
         TL.cache.text_length = 0;
         //
-        if (TL.vars.on_next && typeof TL.vars.on_next == "function") TL.on_next(`${TL.cache.full_text}`);
+        if (TL.vars.on_next && typeof TL.vars.on_next == "function") TL.vars.on_next(`${TL.cache.full_text}`);
         //
         TL.do_type();
     };
 
     do_type = () => {
         const TL = this;
+        if (!TL.cache._mounted) return false; // preventing memory leaks
         //
         if (TL.cache.text_length >= TL.cache.full_text.length) return false; // something is off, terminating to avoid memory leaks;
         //
@@ -104,7 +113,7 @@ class Typerloop {
         TL.cache.new_character = `${TL.cache.full_text.substring(TL.cache.text_length - 1, TL.cache.text_length)}`;
         TL.cache.previous_character = `${TL.cache.full_text.substring(TL.cache.text_length - 2, TL.cache.text_length - 1)}`;
 
-        var word_delay = TL.cache.previous_character == " " || TL.cache.previous_character == "\n" ? random_int({ min: TL.vars.word_delay.min, max: TL.vars.word_delay.max }) : 0; // TO DO: test this
+        var word_delay = TL.cache.new_character == " " || TL.cache.previous_character == "\n" ? random_int({ min: TL.vars.word_delay.min, max: TL.vars.word_delay.max }) : 0; // TO DO: test this
 
         // Action!
         if (TL.vars.on_update && typeof TL.vars.on_update == "function") TL.vars.on_update(TL.cache.partial_text, TL.cache.new_character, TL.cache.previous_character);
