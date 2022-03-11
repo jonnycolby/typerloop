@@ -1,6 +1,6 @@
 {
   "name": "typerloop",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A tiny package for an animated text typing effect.  Zero external dependencies.",
   "main": "index.js",
   "repository": {
