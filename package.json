@@ -8,8 +8,8 @@
     "url": "https://github.com/jonnycolby/typerloop.git"
   },
   "scripts": {
-    "deploy:prerelease": "npm version prerelease --preid=pre && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
-    "deploy:patch": "git push && git add . && git commit -m \"publishing pre-release to npm\" --allow-empty && npm version prerelease --preid=pre && git push && npm publish",
+    "deploy:prerelease": "git push && git add . && git commit -m \"publishing pre-release to npm\" --allow-empty && npm version prerelease --preid=pre && git push && npm publish",
+    "deploy:patch": "git push && git add . && git commit -m \"publishing patch upgrade to npm\" --allow-empty && npm version patch && git push && npm publish",
     "deploy:minor": "git push && git add . && git commit -m \"publishing minor upgrade to npm\" --allow-empty && npm version minor && git push && npm publish",
     "deploy:major": "git push && git add . && git commit -m \"publishing major upgrade to npm\" --allow-empty && npm version major && git push && npm publish",
     "deploy": "npm run deploy:patch"
