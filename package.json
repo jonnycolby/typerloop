@@ -1,0 +1,20 @@
+{
+  "name": "typerloop",
+  "version": "0.0.2",
+  "description": "A tiny package for an animated text typing effect.  Zero external dependencies.",
+  "main": "index.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/jonnycolby/typerloop.git"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "keywords": [
+    "typewriter",
+    "scroll"
+  ],
+  "author": "Jonathan Colby <hello@jonnycolby.com> (https://jonny.link/)",
+  "license": "MIT"
+}
