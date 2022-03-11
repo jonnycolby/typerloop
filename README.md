@@ -32,3 +32,15 @@ npm i typerloop
 yarn add typerloop
 
 ```
+
+## Options
+
+| Name    | Type            | Default value | Description                                         |
+| ---     | ---             | ---           | ---                                                 |
+| text    | String or Array | []            | An array of strings to cycle through.               |
+
+## Methods
+
+| Name    | Params          | Description                                                         |
+| ---     | ---             | ---                                                                 |
+| start   | -               | Start the typing effect.                                            |
