@@ -1,23 +1,21 @@
 {
   "name": "typerloop",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A tiny package for an animated text typing effect.  Zero external dependencies.",
   "main": "index.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/jonnycolby/typerloop.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonnycolby/typerloop.git"
   },
   "scripts": {
-      "deploy:prerelease": "npm version prerelease --preid=pre && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
-      "deploy:patch": "npm version patch && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
-      "deploy:minor": "npm version minor && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
-      "deploy:major": "npm version major && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
-      "deploy": "npm run deploy:patch"
+    "deploy:prerelease": "npm version prerelease --preid=pre && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
+    "deploy:patch": "npm version patch && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
+    "deploy:minor": "npm version minor && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
+    "deploy:major": "npm version major && git add . && git commit -m \"publishing pre-release to npm\" && git push && npm publish",
+    "deploy": "npm run deploy:patch"
   },
-  "dependencies": {
-  },
-  "devDependencies": {
-  },
+  "dependencies": {},
+  "devDependencies": {},
   "keywords": [
     "typewriter",
     "scroll"
