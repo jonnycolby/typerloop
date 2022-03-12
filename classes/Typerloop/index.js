@@ -19,7 +19,7 @@ class Typerloop {
     constructor(props) {
         const TL = this;
         //
-        var input_text = [];
+        var input_text = ["Hello!"];
         if (props.text && typeof props.text == "string") input_text = [`${props.text}`];
         else if (props.text && Array.isArray(props.text)) input_text = [...props.text];
         //
