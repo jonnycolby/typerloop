@@ -50,6 +50,9 @@ yarn add typerloop
 
 ## Examples
 
+[Live Demo](https://codepen.io/jonnycolby/pen/yLpBWeX)
+
+
 ### Basic example
 
 ```js
