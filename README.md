@@ -55,16 +55,16 @@ yarn add typerloop
 
 ```js
 var typer = new Typerloop({
-    text: ["Hello", "This is how the Typerloop works."], // a set of text items to be typed sequentially;
-    min:   24,    // minimum number of milliseconds before the next character is typed;
-    max:   160,   // maximum number of milliseconds before the next character is typed;
-    word_min:   0,    // minimum number of milliseconds before the next word is typed, in addition to character delay;
+    text: ["Hello", "This is how the Typerloop works."],  // a set of text items to be typed sequentially;
+    min:   24,         // minimum number of milliseconds before the next character is typed;
+    max:   160,        // maximum number of milliseconds before the next character is typed;
+    word_min:   0,     // minimum number of milliseconds before the next word is typed, in addition to character delay;
     word_max:   240,   // maximum number of milliseconds before the next word is typed, in addition to character delay;
-    delay: 1000,  // milliseconds to show the completed text item before switching to the next;
+    delay: 1000,       // milliseconds to show the completed text item before switching to the next;
     on_update: (new_text, new_character, previous_character)  => {
         // text updated to string new_text;
         // the most recently added character is new_character,
-        // and the one before is previous_character;
+        //   and the one before is previous_character;
         my_do_something_method(new_text);
     },
     on_next: (full_text) => {
@@ -82,4 +82,4 @@ typer.start();
 
 ### React example
 
-*See the example component in the /examples directory.*
+*See the example component in the `/examples` directory.*
