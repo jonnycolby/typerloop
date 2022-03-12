@@ -2,6 +2,8 @@
 
 >
 
+One infinite typing loop.
+
 Typerloop is a tiny package for producing an animated text typing effect.  Zero external dependencies.  Works with React or any Javascript library.
 
 [![NPM](https://img.shields.io/npm/v/typerloop.svg)](https://www.npmjs.com/package/typerloop)
@@ -59,10 +61,25 @@ var typer = new Typerloop({
     word_min:   0,    // minimum number of milliseconds before the next word is typed, in addition to character delay;
     word_max:   240,   // maximum number of milliseconds before the next word is typed, in addition to character delay;
     delay: 1000,  // milliseconds to show the completed text item before switching to the next;
-    on_update: (new_text, new_character, previous_character)  => { /* text updated to string new_text; */ return true; },
-    on_next:   (full_text)                                    => { /* text item switched and will type full_text; */ return true; },
-    on_loop:   ()                                             => { /* finished typing all strings, looping back to the first string; */ return true; },
+    on_update: (new_text, new_character, previous_character)  => {
+        // text updated to string new_text;
+        // the most recently added character is new_character,
+        // and the one before is previous_character;
+        my_do_something_method(new_text);
+    },
+    on_next: (full_text) => {
+        // the current text item switched and Typerloop will now type full_text;
+        my_text_did_switch_method(full_text);
+    },
+    on_loop: () => {
+        // finished typing all strings, looping back to the first string;
+        my_text_items_did_loop_to_beginning();
+    }
 });
 
 typer.start();
 ```
+
+### React example
+
+*See the example component in the /examples directory.*
