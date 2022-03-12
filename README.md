@@ -12,8 +12,7 @@ Typerloop is a tiny package for producing an animated text typing effect.  Zero 
 
 
 
-[NPM Repository](https://npmjs.org/typerloop)
-[CodePen Example](https://codepen.io/jonnycolby/pen/yLpBWeX)
+[NPM Repository](https://npmjs.org/typerloop) | [CodePen Example](https://codepen.io/jonnycolby/pen/yLpBWeX)
 
 ## CDN
 
